@@ -29,3 +29,5 @@ person.damage(50);
 console.log(person);
 person.levelUp();
 console.log(person);
+person6.levelUp();
+console.log(person6);

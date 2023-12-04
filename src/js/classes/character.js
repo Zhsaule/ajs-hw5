@@ -1,9 +1,10 @@
 export class Character {
-  constructor(name, type, attack, defence) {
+  constructor(name, type) {
+    const types = ["Bowman", "Swordsman", "Magician", "Daemon", "Undead", "Zombie"]
     if (typeof name !== 'string' || (name.length < 2 || name.length > 10)) {
       throw new Error('Имя должно содержать от 2 до 10 символов');
     }
-    if (!["Bowman", "Swordsman", "Magician", "Daemon", "Undead", "Zombie"].includes(type)) {
+    if (!types.includes(type)) {
       throw new Error('Некорректный тип персонажа');
     } 
     
@@ -11,19 +12,18 @@ export class Character {
     this.type = type;
     this.health = 100;
     this.level = 1;
-    this.attack = isNaN(attack) ? 0 : attack;
-    this.defence = isNaN(defence) ? 0 : defence;
+    this.attack = undefined;
+    this.defence = undefined;
   }
   
   levelUp() {
     if (this.health === 0) {
       throw new Error('Нельзя повысить левел умершего');
     }
-    
-    this.level += 1;
-    this.attack += this.attack * 0.2;
-    this.defence += this.defence * 0.2;
     this.health = 100;
+    this.level += 1;
+    this.attack += this.attack * 0.2; //isNaN(this.attack) ? 0 : this.attack
+    this.defence += this.defence * 0.2; //isNaN(this.defence) ? 0 : this.defence
   }
   
   damage(points) {

@@ -4,7 +4,7 @@ describe('Character', () => {
   let character;
 
   beforeEach(() => {
-    character = new Character("Name", "Bowman", 30, 20);
+    character = new Character("Name", "Bowman");
   });
 
   test('Проверка создания Character с правильными параметрами', () => {
@@ -13,8 +13,8 @@ describe('Character', () => {
       type: 'Bowman',
       health: 100,
       level: 1,
-      attack: 30,
-      defence: 20
+      attack: undefined,
+      defence: undefined
     };    
     expect(character).toEqual(character1);
   });
@@ -25,8 +25,8 @@ describe('Character', () => {
       type: 'Bowman',
       health: 100,
       level: 1,
-      attack: 0,
-      defence: 0
+      attack: undefined,
+      defence: undefined
     };    
     character = new Character("Name", "Bowman");
     expect(character).toEqual(character1);
@@ -54,7 +54,6 @@ describe('Character', () => {
   });
 
   test('Проверка levelUp', () => {
-    character.levelUp();
     const character1 = {
       name: 'Name',
       type: 'Bowman',
@@ -62,7 +61,11 @@ describe('Character', () => {
       level: 2,
       attack: 36,
       defence: 24,
-    };    
+    };
+    character = new Character("Name", "Bowman");
+    character.attack = 30;
+    character.defence = 20;
+    character.levelUp();
     expect(character).toEqual(character1);
   });
 
@@ -72,6 +75,7 @@ describe('Character', () => {
   });
 
   test('Проверка damage', () => {
+    character.defence = 20;
     character.damage(50);
     expect(character.health).toBe(60);
   });
